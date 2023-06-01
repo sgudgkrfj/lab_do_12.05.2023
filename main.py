@@ -1,13 +1,19 @@
-def cache(func):
-    memo = {}
-
+def logger(func):
     def wrapper(*args, **kwargs):
-        key = (args, tuple(kwargs.items()))
-        if key in memo:
-            return memo[key]
-        else:
-            result = func(*args, **kwargs)
-            memo[key] = result
-            return result
+        result = func(*args, **kwargs)
+        print(f"Виклик функції {func.__name__} з аргументами {args}, {kwargs}. Результат: {result}")
+        return result
 
     return wrapper
+
+
+@logger
+def add(a, b):
+    return a + b
+
+@logger
+def multiply(a, b):
+    return a * b
+
+print(add(2, 3))
+print(multiply(4, 5))
